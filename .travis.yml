@@ -1,0 +1,12 @@
+language: python
+python:
+  - "3.6"
+install:
+  - python setup.py sdist
+  - pip install flake8 yapf isort
+before_script:
+  - flake8
+  - isort -rc --diff ppln_tensorboard/
+  - yapf -r -d ppln_tensorboard/
+script:
+  - python setup.py test
