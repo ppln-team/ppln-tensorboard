@@ -12,27 +12,27 @@ def get_absolute_path(*args):
 
 def get_contents(*args):
     """Get the contents of a file relative to the source distribution directory."""
-    with codecs.open(get_absolute_path(*args), 'r', 'UTF-8') as handle:
+    with codecs.open(get_absolute_path(*args), "r", "UTF-8") as handle:
         return handle.read()
 
 
 def get_version(*args):
     """Extract the version number from a Python module."""
     contents = get_contents(*args)
-    metadata = dict(re.findall('__([a-z]+)__ = [\'"]([^\'"]+)', contents))
-    return metadata['version']
+    metadata = dict(re.findall("__([a-z]+)__ = ['\"]([^'\"]+)", contents))
+    return metadata["version"]
 
 
 setup(
-    name='ppln-tensorboard',
-    version=get_version('ppln_tensorboard', '__init__.py'),
-    author='Miras Amir',
-    author_email='amirassov@gmail.com',
-    description='Tensorboard hook for ppln',
-    long_description_content_type='text/markdown',
-    url='https://github.com/ppln-team/ppln-tensorboard',
+    name="ppln-tensorboard",
+    version=get_version("ppln_tensorboard", "__init__.py"),
+    author="Miras Amir",
+    author_email="amirassov@gmail.com",
+    description="Tensorboard hook for ppln",
+    long_description_content_type="text/markdown",
+    url="https://github.com/ppln-team/ppln-tensorboard",
     packages=find_packages(),
-    install_requires=['tensorboard'],
-    setup_requires=['pytest-runner'],
-    python_requires='>=3.6.0'
+    install_requires=["tensorboard"],
+    setup_requires=["pytest-runner"],
+    python_requires=">=3.6.0",
 )
