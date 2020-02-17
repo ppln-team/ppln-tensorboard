@@ -1,12 +1,12 @@
 language: python
 python:
-  - "3.6"
+  - "3.7"
 install:
   - python setup.py sdist
-  - pip install flake8 yapf isort
+  - pip install flake8 black==19.3b0 isort
 before_script:
   - flake8
-  - isort -rc --diff ppln_tensorboard/
-  - yapf -r -d ppln_tensorboard/
+  - isort -rc --diff .
+  - black --config=black.toml --check .
 script:
   - python setup.py test

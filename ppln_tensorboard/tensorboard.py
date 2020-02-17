@@ -1,9 +1,9 @@
+from torch.utils.tensorboard import SummaryWriter
+
 from ppln.hooks import BaseHook
 from ppln.hooks.priority import Priority
 from ppln.hooks.registry import HOOKS
 from ppln.utils.misc import master_only
-
-from torch.utils.tensorboard import SummaryWriter
 
 
 @HOOKS.register_module
@@ -24,9 +24,9 @@ class TensorboardLoggerHook(BaseHook):
     @master_only
     def log(self, runner):
         for value in runner.log_buffer.output:
-            if value in ['time', 'data_time']:
+            if value in ["time", "data_time"]:
                 continue
-            tag = f'{value}/{runner.mode}'
+            tag = f"{value}/{runner.mode}"
             record = runner.log_buffer.output[value]
             if isinstance(record, str):
                 self.writer.add_text(tag, record, runner.iter)
