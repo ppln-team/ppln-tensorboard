@@ -3,7 +3,7 @@ from torch.utils.tensorboard import SummaryWriter
 from ppln.hooks import BaseHook
 from ppln.hooks.priority import Priority
 from ppln.hooks.registry import HOOKS
-from ppln.utils.misc import master_only
+from ppln.utils.dist import master_only
 
 
 @HOOKS.register_module
