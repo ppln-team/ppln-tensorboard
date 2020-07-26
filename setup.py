@@ -32,7 +32,7 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/ppln-team/ppln-tensorboard",
     packages=find_packages(),
-    install_requires=["tensorboard", "ppln>=1.1"],
+    install_requires=["tensorboard"],
     setup_requires=["pytest-runner"],
     python_requires=">=3.6.0",
 )
