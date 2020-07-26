@@ -3,7 +3,7 @@ from torch.utils.tensorboard import SummaryWriter
 from ppln.hooks import BaseHook
 from ppln.hooks.priority import Priority
 from ppln.hooks.registry import HOOKS
-from ppln.utils.misc import master_only
+from ppln.utils.dist import master_only
 
 
 @HOOKS.register_module
@@ -23,15 +23,14 @@ class TensorboardLoggerHook(BaseHook):
 
     @master_only
     def log(self, runner):
-        for value in runner.log_buffer.output:
-            if value in ["time", "data_time"]:
+        for name, value in runner.epoch_outputs.items():
+            if name in ["time", "data_time"]:
                 continue
-            tag = f"{value}/{runner.mode}"
-            record = runner.log_buffer.output[value]
-            if isinstance(record, str):
-                self.writer.add_text(tag, record, runner.iter)
+            tag = f"{name}/{runner.mode}"
+            if isinstance(value, str):
+                self.writer.add_text(tag, value, runner.iter)
             else:
-                self.writer.add_scalar(tag, record, runner.iter)
+                self.writer.add_scalar(tag, value, runner.iter)
 
     @master_only
     def after_run(self, runner):
